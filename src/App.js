@@ -8,10 +8,10 @@ import './App.css'; //글로벌로 정의됨
 class App extends React.Component {
     state = {
         players: [
-            {name: 'LDK', id: 1},
-            {name: 'HONG', id: 2},
-            {name: 'KIM', id: 3},
-            {name: 'PARK', id: 4},
+            {name: 'LDK', score: 5, id: 1},
+            {name: 'HONG', score: 6, id: 2},
+            {name: 'KIM', score: 7, id: 3},
+            {name: 'PARK', score: 8, id: 4},
         ]
     }
 
@@ -25,6 +25,21 @@ class App extends React.Component {
         });
     }
 
+    handleChangeScore = (id, delta) => {
+        console.log("changeSocre", id + "," + delta)
+
+        this.setState(prevState => {
+            //딥카피 새로운 똑같은 배열을 만듬 ( [ ... ] )
+            const players = [...prevState.players];
+            players.forEach(players => {
+                if (players.id === id) {
+                    players.score += delta;
+                }
+            })
+            return {players}
+        })
+    }
+
     render() {
         return (
             <div className="scoreboard">
@@ -32,7 +47,7 @@ class App extends React.Component {
                 {
                     this.state.players.map(player => (
                         <Player name={player.name} score={player.score} key={player.id} id={player.id}
-                                removePlayer={this.handleRemove}/> //key는 리액트 내부에서 쓰이므로 전달되지 않음
+                                removePlayer={this.handleRemove} changeScore={this.handleChangeScore}/>//key는 리액트 내부에서 쓰이므로 전달되지 않음
                     ))
                 }
             </div>

@@ -5,8 +5,8 @@ export class Counter extends React.Component {
     // state = {
     //   score: 0
     // }
-    //변수를 초기화 목적
-    constructor() {
+    //변수를 초기화 목적s
+/*    constructor() {
         //부모의 속성도 초기화시키기 위해 상속함
         super();
         this.state = {
@@ -15,9 +15,7 @@ export class Counter extends React.Component {
         }
         this.handleChange.bind(this);
         //this가 클래스의 this라는것을 bind 해줘야 인식함
-    }
-
-
+    }*/
 
 
     handleChange = delta => {
@@ -33,9 +31,9 @@ export class Counter extends React.Component {
     render() {
         return (
             <div className="counter">
-                <button className="counter-action decrement" onClick={() => this.handleChange(-1)}> -</button>
-                <span className="counter-score">{this.state.score}</span>
-                <button className="counter-action increment" onClick={() => this.handleChange(1)}> +</button>
+                <button className="counter-action decrement" onClick={() => this.props.changeScore(this.props.id, -1)}> -</button>
+                <span className="counter-score">{this.props.score}</span>
+                <button className="counter-action increment"  onClick={() => this.props.changeScore(this.props.id, 1)}> +</button>
             </div>
         );
     }
