@@ -17,6 +17,9 @@ export class Counter extends React.Component {
         //this가 클래스의 this라는것을 bind 해줘야 인식함
     }
 
+
+
+
     handleChange = delta => {
         console.log(this); // arrow function 에서의 this는 lexical this가 된다.
         console.log('handleChange')
