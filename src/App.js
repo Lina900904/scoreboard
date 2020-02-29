@@ -1,16 +1,8 @@
 import React from 'react';
+import  {Header} from './components/Header'
 import './App.css'; //글로벌로 정의됨
 
 
-const Header = (props) => {
-  console.log(props)
-  return (
-      <header className="header">
-        <h1 className="h1">{props.title}</h1>
-        <span className="stats">Players: {props.totalPlayers}</span>
-      </header>
-  );
-}
 
 const Player = (props) => {
   return (
