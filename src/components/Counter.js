@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from "react-redux";
+import {changeScore} from "../redux/actions";
 
 export class Counter extends React.Component {
     // 클래스 바로 아래에 선언되는 변수는 속성이 된다
@@ -38,3 +40,12 @@ export class Counter extends React.Component {
         );
     }
 }
+
+//(액션을 디스패치하는) 펑션을 props로 맵핑하겠다
+const mapActionToProps = (dispatch) => ({
+    //왼쪽 props, 오른쪽은 펑션
+    changeScore: (id, delta) => dispatch(changeScore(id, delta))
+})
+//()() 펑션이 두번 커링펑션
+//Hoc : High Order Component : 컴포넌트를 입력으로 넣어서 새로운 기능을 추가한 신규 컴포넌트를 생성
+export default connect(null, mapActionToProps) (Counter);

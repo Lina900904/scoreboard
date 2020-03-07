@@ -1,21 +1,19 @@
 import React from 'react';
 import {Header} from './components/Header'
-import {Player} from './components/Player'
+import Player from './components/Player'
+import {connect, useDispatch, useSelector} from "react-redux";
 
-import './App.css'; //글로벌로 정의됨
+import './App.css';
+import AddPlayerForm from "./components/AddPlayerForm";
 
+let maxId = 4;
 
-class App extends React.Component {
-    state = {
-        players: [
-            {name: 'LDK', score: 5, id: 1},
-            {name: 'HONG', score: 6, id: 2},
-            {name: 'KIM', score: 7, id: 3},
-            {name: 'PARK', score: 8, id: 4},
-        ]
-    }
+function App(props)  {
 
-    handleRemove = (id) => {
+    //훅 사용하기 위해서
+    const players = useSelector(state => state.player.players);
+
+  /*  handleRemove = (id) => {
         console.log("handleRemove");
         console.log("id", id);
         //자식은 바구니만 보기 때문에 배열 내용이 달라도 알지못함.. 그래서 filter같은걸 이용해서 새로운 배열을 만들어 리턴해야함
@@ -23,9 +21,9 @@ class App extends React.Component {
             const players = prevState.players.filter(player => player.id !== id);
             return {players} // key vlaue가 같으면 하나 생략 가능 : es6 short hand property
         });
-    }
+    }*/
 
-    handleChangeScore = (id, delta) => {
+   /* handleChangeScore = (id, delta) => {
         console.log("changeSocre", id + "," + delta)
 
         this.setState(prevState => {
@@ -39,21 +37,34 @@ class App extends React.Component {
             return {players}
         })
     }
+*/
+ /*   handleAddPlayer = (name) => {
+        console.log('handleAddPlayer', name)
+        this.setState(prevState => {
+            //원본배열 복사
+            const players = [...prevState.players];
+            players.push({name, id: ++maxId, score: 0});
+            return {players};
+        })
+    }*/
 
-    render() {
         return (
             <div className="scoreboard">
-                <Header title="My ScoreBoard" totalPlayers={11}/>
+                <Header title="My ScoreBoard" totalPlayers={11} players={players}/>
                 {
-                    this.state.players.map(player => (
-                        <Player name={player.name} score={player.score} key={player.id} id={player.id}
-                                removePlayer={this.handleRemove} changeScore={this.handleChangeScore}/>//key는 리액트 내부에서 쓰이므로 전달되지 않음
+                    players.map(player => (
+                        <Player name={player.name} score={player.score} key={player.id} id={player.id} /*removePlayer={this.handleRemove}*/
+                                 /*changeScore={this.handleChangeScore}*//>//key는 리액트 내부에서 쓰이므로 전달되지 않음
                     ))
                 }
+                <AddPlayerForm ></AddPlayerForm>
             </div>
         );
-    }
 
 }
 
+
+
 export default App;
+
+
